@@ -26,7 +26,7 @@ var specialCharacters = [
 "]",
 ];
 
-var numbCharacters = [
+var numbCharcters = [
 "0",
 "1",
 "2",
@@ -97,12 +97,12 @@ var upperCaseCharacters = [
 "Z",  
 ];
 
-var generateBtn = document.querySelector("#generate");
+let generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+  let password = generatePassword();
+  let passwordText = document.querySelector("#password");
 
   if (password === undefined) {
     return
@@ -117,30 +117,66 @@ function generatePassword () {
   if (selectedOptions === undefined) {
     return
   }
+  
+  let { length, lowercase, uppercase, specialChars, numbers } = selectedOptions
+  let possibleCharacters = [];
+  let generatePassword = "";
+  
+  if (lowercase) {
+    possibleCharacters = possibleCharacters.concat(lowerCaseCharacters)
+  }
+  if (uppercase) {
+    possibleCharacters = possibleCharacters.concat(upperCaseCharacters)
+  }
+  if (numbers) {
+    possibleCharacters = possibleCharacters.concat(numbCharacters)
+  }
+  if (specialChars) {
+    possibleCharacters = possibleCharacters.concat(specialCharacters)
+  }
+  
+  for (i = 0; i < length + 1; i++) {
+    let randomCharIndex = Math.floor(Math.random() * possibleCharacters.length)
+    generatedPassword += possibleCharacters[randomCharIndex]
+  }
+  return generatedPassword
 }
 
-let { length, lowercase, uppercase, specialChars, number } = selectedOptions
-let possibleCharacters = [];
-let generatePassword = "";
 
-if (lowercase) {
-  possibleCharacters = possibleCharacters.concat(lowerCaseCharacters)
-}
-if (uppercase) {
-  possibleCharacters = possibleCharacters.concat(upperCaseCharacters)
-}
-if (numbers) {
-  possibleCharacters = possibleCharacters.concat(numbCharacters)
-}
-if (specialChars) {
-  possibleCharacters = possibleCharacters.concat(specialCharacters)
-}
+function getuserSelections() {
+  let numberofChars = parseInt(prompt("How many characters would you like your password to be? Please select a number between between 9-100."))
 
-for (i = 0; i < length + 1; i++) {
-  let randomCharIndex = Math.floor(Math.random() * possibleCharacters.length)
-  generatedPassword += possibleCharacters[randomCharIndex]
-}
-return generatedPassword
+  if (Number.isNaN(numberofChars)) {
+    alert("You must enter a number.")
+    return
+  }
+  if (numberofChars < 9) {
+    alert("You must include at least 9 characters.")
+    return
+  } else if (numberofChars > 100) {
+    alert("You may not select more than 100 characters.")
+    return
+  }
+
+  let useLowerCase = confirm("Would you like this password to include lowercase letters?")
+  let useUpperCase = confirm("Would you like this password to include special letters?")
+  let useNumbers = confirm("Would you like this password to include numeric characters?")
+  let useSpecialChars = confirm("Would you like this password to include special characters?")
+
+  if (!useLowerCase && !useUpperCase && !useSpecialChars && !useNumbers) {
+    alert("You need to select a minium of one charcter type.")
+    return
+  }
+
+  let optionObj = {
+    length: numberofChars,
+    lowercase: useLowerCase,
+    uppercase: useUpperCase,
+    numbers: useNumbers,
+    specialChars: useSpecialChars
+  }
+  return optionObj
+  return useLowerCase
 }
 
 // Add event listener to generate button
