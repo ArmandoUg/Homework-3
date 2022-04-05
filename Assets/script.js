@@ -112,5 +112,15 @@ function writePassword() {
 
 }
 
+function generatePassword () {
+  let selectedOptions = getuserSelections()
+  if (selectedOptions === undefined) {
+    return
+  }
+}
+
+let { length, lowercase, uppercase, specialChars, number } = selectedOptions
+let possibleCharacters = []
+
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
