@@ -120,7 +120,28 @@ function generatePassword () {
 }
 
 let { length, lowercase, uppercase, specialChars, number } = selectedOptions
-let possibleCharacters = []
+let possibleCharacters = [];
+let generatePassword = "";
+
+if (lowercase) {
+  possibleCharacters = possibleCharacters.concat(lowerCaseCharacters)
+}
+if (uppercase) {
+  possibleCharacters = possibleCharacters.concat(upperCaseCharacters)
+}
+if (numbers) {
+  possibleCharacters = possibleCharacters.concat(numbCharacters)
+}
+if (specialChars) {
+  possibleCharacters = possibleCharacters.concat(specialCharacters)
+}
+
+for (i = 0; i < length + 1; i++) {
+  let randomCharIndex = Math.floor(Math.random() * possibleCharacters.length)
+  generatedPassword += possibleCharacters[randomCharIndex]
+}
+return generatedPassword
+}
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
