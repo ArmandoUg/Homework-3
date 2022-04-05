@@ -26,7 +26,7 @@ var specialCharacters = [
 "]",
 ];
 
-var numbCharcters = [
+var numbCharacters = [
 "0",
 "1",
 "2",
@@ -108,7 +108,7 @@ function writePassword() {
     return
   }
 
-  passwordText.value = password;
+  passwordText = value;
 
 }
 
@@ -118,9 +118,9 @@ function generatePassword () {
     return
   }
   
-  let { length, lowercase, uppercase, specialChars, numbers } = selectedOptions
+  let { length, lowercase, uppercase, numbers, specialChars } = selectedOptions
   let possibleCharacters = [];
-  let generatePassword = "";
+  let generatedPassword = "";
   
   if (lowercase) {
     possibleCharacters = possibleCharacters.concat(lowerCaseCharacters)
