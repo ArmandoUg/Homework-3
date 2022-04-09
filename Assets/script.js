@@ -144,7 +144,7 @@ function generatePassword () {
 
 
 function getuserSelections() {
-  let numberofChars = parseInt(prompt("How many characters would you like your password to be? Please select a number between between 9-80."))
+  let numberofChars = parseInt(prompt("How many characters would you like your password to be? Please select a number between between 9-128."))
 
   if (Number.isNaN(numberofChars)) {
     alert("You must enter a number.")
@@ -153,8 +153,8 @@ function getuserSelections() {
   if (numberofChars < 9) {
     alert("You must include at least 9 characters.")
     return
-  } else if (numberofChars > 80) {
-    alert("You may not select more than 80 characters.")
+  } else if (numberofChars > 128) {
+    alert("You may not select more than 128 characters.")
     return
   }
 
