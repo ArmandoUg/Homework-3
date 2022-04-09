@@ -100,7 +100,7 @@ var upperCaseCharacters = [
 let generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
-function writePassword() {
+function createPassword() {
   let password = generatePassword();
   let passwordText = document.querySelector("#password");
 
@@ -136,35 +136,35 @@ function generatePassword () {
   }
   
   for (i = 0; i < length + 1; i++) {
-    let randomCharIndex = Math.floor(Math.random() * possibleCharacters.length)
-    generatedPassword += possibleCharacters[randomCharIndex]
+    let randomChar = Math.floor(Math.random() * possibleCharacters.length)
+    generatedPassword += possibleCharacters[randomChar]
   }
   return generatedPassword
 }
 
 
 function getuserSelections() {
-  let numberofChars = parseInt(prompt("How many characters would you like your password to be? Please select a number between between 9-128."))
+  let numberofChars = parseInt(prompt("How many characters would you like your password to have? Please select a number between between 9-128."))
 
   if (Number.isNaN(numberofChars)) {
     alert("You must enter a number.")
     return
   }
   if (numberofChars < 9) {
-    alert("You must include at least 9 characters.")
+    alert("You must include at least 9 characters for this password.")
     return
   } else if (numberofChars > 128) {
-    alert("You may not select more than 128 characters.")
+    alert("You may not select more than 128 characters for the password.")
     return
   }
 
   let useLowerCase = confirm("Would you like this password to include lowercase letters?")
-  let useUpperCase = confirm("Would you like this password to include special letters?")
+  let useUpperCase = confirm("Would you like this password to include uppercase letters?")
   let useNumbers = confirm("Would you like this password to include numeric characters?")
   let useSpecialChars = confirm("Would you like this password to include special characters?")
 
   if (!useLowerCase && !useUpperCase && !useSpecialChars && !useNumbers) {
-    alert("You need to select a minium of one charcter type.")
+    alert("You need to select a minium of one charcter type for the password.")
     return
   }
 
@@ -176,8 +176,7 @@ function getuserSelections() {
     specialChars: useSpecialChars
   }
   return optionObj
-  return useLowerCase
 }
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+generateBtn.addEventListener("click", createPassword);
